@@ -1,0 +1,42 @@
+---
+title: "stat_hydro_ex"
+author: "Alexander"
+date: "07/07/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file(),echo = TRUE)
+```
+
+## Preparation
+
+```{r load tidyverse}
+library(tidyverse)
+```
+
+```{r loading data}
+
+flow <- read.csv("data/flow.csv")
+
+```
+
+
+## 1. Statistical Hydrology
+
+### 1.1 Annual Totals Series (ATS) Analysis
+
+```{r calculating annual totals and relevant statistics}
+flow <- flow %>%
+  mutate(annual_total = Jan + Feb + Mar + Apr + May + Jun + Jul + Aug + Sep + Oct + Nov + Dec)
+
+flow %>%
+  select(yr, annual_total) %>%
+  summarise(annual_total_mean = mean(annual_total), annual_total_var = var(annual_total), annual_total_stdr_dev = sd(annual_total))
+
+```
+
+```{r}
+
+```
+
